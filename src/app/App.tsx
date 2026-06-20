@@ -1,3 +1,5 @@
+import profileImage from "../assets/profile.jpg";
+import aboutImage from "../assets/about-image.jpg";
 import { useState } from "react";
 import { motion } from "motion/react";
 import { Mail, Github, Twitter, ExternalLink, Menu, X, Heart, Star } from "lucide-react";
@@ -167,13 +169,13 @@ export default function App() {
               style={{ border: "3px dashed var(--primary)", padding: "4px", background: "var(--card)" }}
             >
               <img
-                src="https://images.unsplash.com/photo-1573850038488-ad1a0a86e853?w=200&h=200&fit=crop&auto=format"
+                src={profileImage}
                 alt="avatar"
                 className="w-full h-full rounded-full object-cover"
               />
             </div>
             <div className="absolute -top-2 -right-2 bg-yellow-300 rounded-full w-8 h-8 flex items-center justify-center text-lg border-2 border-white shadow">
-              ✨
+              🦋
             </div>
           </div>
 
@@ -274,23 +276,29 @@ export default function App() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?w=500&h=420&fit=crop&auto=format"
-                alt="cozy desk workspace"
-                className="w-full h-72 object-cover rounded-2xl relative z-10"
-                style={{ border: "3px solid var(--border)" }}
-              />
+            <div className="relative flex justify-center items-center">
+
               <div
-                className="absolute -bottom-4 -right-4 w-full h-full rounded-2xl"
-                style={{ background: "var(--secondary)", border: "2.5px dashed var(--border)", zIndex: 0 }}
+                className="absolute w-[500px] h-[500px] blur-3xl opacity-60"
+                style={{
+                  background: "#c5b8f5",
+                }}
               />
+
               <div
-                className="absolute -top-3 -left-3 bg-yellow-200 rounded-xl px-3 py-1 z-20"
-                style={{ fontFamily: "'Caveat', cursive", fontSize: "1rem", fontWeight: 700, border: "2px solid #d4b896", transform: "rotate(-4deg)" }}
+                className="blob relative overflow-hidden w-[450px] h-[450px] z-10"
+                style={{
+                  border: "5px solid #c5b8f5",
+                  boxShadow: "0 0 60px rgba(197,184,245,0.65)",
+                }}
               >
-                that's me! ☕
+                <img
+                  src={aboutImage}
+                  alt="About Arya"
+                  className="w-full h-full object-cover"
+                />
               </div>
+
             </div>
           </motion.div>
 

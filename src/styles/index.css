@@ -1,3 +1,7 @@
 @import './fonts.css';
 @import './tailwind.css';
 @import './theme.css';
+.blob {
+  aspect-ratio: 1;
+  clip-path: shape(from 56.50% 89.01%,curve to 47.94% 92.90% with 52.56% 90.61%,smooth to 38.36% 94.92%,smooth to 31.71% 88.07%,smooth to 25.51% 80.55%,smooth to 16.58% 77.38%,smooth to 8.18% 71.64%,smooth to 8.80% 62.16%,smooth to 6.97% 52.06%,smooth to 4.18% 43.55%,smooth to 12.98% 36.68%,smooth to 19.02% 30.17%,smooth to 22.16% 22.60%,smooth to 26.98% 14.98%,smooth to 33.84% 9.17%,smooth to 42.83% 9.31%,smooth to 51.87% 9.70%,smooth to 61.43% 6.66%,smooth to 70.48% 8.44%,smooth to 76.19% 16.52%,smooth to 79.58% 25.33%,smooth to 81.72% 33.27%,smooth to 88.09% 39.88%,smooth to 96.64% 47.34%,smooth to 93.78% 55.92%,smooth to 90.01% 65.30%,smooth to 87.30% 73.35%,smooth to 78.59% 77.77%,smooth to 73.01% 85.38%,smooth to 65.97% 89.25%,smooth to 56.50% 89.01%);
+}
