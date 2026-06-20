@@ -52,17 +52,41 @@ const projects = [
   }
 ];
 
-const skills = [
-  { name: "Python", color: "#c5b8f5" },
-  { name: "OpenCV", color: "#7dd4b0" },
-  { name: "NumPy", color: "#f9c74f" },
-  { name: "TensorFlow", color: "#f4a4b8" },
-  { name: "FastAPI", color: "#e8845a" },
-  { name: "Deep Learning", color: "#c5b8f5" },
-  { name: "Computer Vision", color: "#7dd4b0" },
-  { name: "React", color: "#f9c74f" },
-  { name: "Tailwind CSS", color: "#f4a4b8" },
-  { name: "Git", color: "#e8845a" },
+const skillGroups = [
+  {
+    title: "AI & Computer Vision 🤖",
+    skills: [
+      "Python",
+      "OpenCV",
+      "NumPy",
+      "TensorFlow",
+      "Deep Learning",
+      "Computer Vision",
+    ],
+    color: "#c5b8f5",
+  },
+  {
+    title: "Web Development 🌐",
+    skills: [
+      "React",
+      "Tailwind CSS",
+      "FastAPI",
+      "HTML",
+      "CSS",
+      "JavaScript",
+    ],
+    color: "#7dd4b0",
+  },
+  {
+    title: "Tools & Design 🎨",
+    skills: [
+      "Git",
+      "GitHub",
+      "VS Code",
+      "Figma",
+    ],
+    color: "#f4a4b8",
+  },
 ];
 
 export default function App() {
@@ -439,28 +463,46 @@ export default function App() {
           </h2>
           <Squiggle color="#f4a4b8" className="mx-auto mb-10" />
 
-          <div className="flex flex-wrap justify-center gap-4">
-            {skills.map((skill, i) => (
-              <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: i * 0.06 }}
-                whileHover={{ scale: 1.1, rotate: i % 2 === 0 ? -3 : 3 }}
-                className="px-5 py-3 rounded-2xl"
+          <div className="grid md:grid-cols-3 gap-8">
+
+            {skillGroups.map((group) => (
+              <div
+                key={group.title}
+                className="p-6 rounded-3xl"
                 style={{
-                  background: skill.color + "33",
-                  border: `2.5px solid ${skill.color}`,
-                  fontFamily: "'Caveat', cursive",
-                  fontSize: "1.15rem",
-                  fontWeight: 700,
-                  cursor: "default",
+                  background: group.color + "22",
+                  border: `3px solid ${group.color}`,
                 }}
               >
-                {skill.name}
-              </motion.div>
+                <h3
+                  className="mb-4"
+                  style={{
+                    fontFamily: "'Caveat', cursive",
+                    fontSize: "1.7rem",
+                    fontWeight: 700,
+                  }}
+                >
+                  {group.title}
+                </h3>
+
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {group.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-3 py-2 rounded-xl"
+                      style={{
+                        background: "var(--card)",
+                        border: `2px solid ${group.color}`,
+                        fontWeight: 600,
+                      }}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
             ))}
+
           </div>
         </div>
       </section>
