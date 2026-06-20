@@ -31,7 +31,7 @@ const projects = [
   {
     title: "Hand Gesture Recognition",
     desc: "Real-time hand gesture recognition using Computer Vision and webcam input.",
-    tags: ["Python", "MediaPipe" , "Real-Time Detection"],
+    tags: ["Python", "CNN" , "Real-Time Detection"],
     color: "#c5b8f5",
     emoji: "🖐️🤖",
   },
@@ -63,6 +63,8 @@ export default function App() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
 
+  const [showResumeModal, setShowResumeModal] = useState(false);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSent(true);
@@ -79,7 +81,7 @@ export default function App() {
             href="#hero"
             style={{ fontFamily: "'Caveat', cursive", fontSize: "1.6rem", color: "var(--primary)", fontWeight: 700 }}
           >
-            Arya.dev 🦋
+            Arya.ai 🦋
           </a>
           <ul className="hidden md:flex gap-8 items-center">
             {["About", "Projects", "Skills", "Contact"].map((item) => (
@@ -207,8 +209,8 @@ export default function App() {
             >
               See my work ✨
             </motion.a>
-            <motion.a
-              href="#contact"
+            <motion.button
+              onClick={() => setShowResumeModal(true)}
               whileHover={{ scale: 1.05, rotate: 1 }}
               whileTap={{ scale: 0.97 }}
               className="px-8 py-3 rounded-2xl"
@@ -220,21 +222,35 @@ export default function App() {
                 fontWeight: 700,
                 boxShadow: "4px 4px 0 var(--border)",
                 display: "inline-block",
+                cursor: "pointer",
               }}
             >
-              Let's Connect 👋
-            </motion.a>
+              Resume 📄
+            </motion.button>
           </div>
         </motion.div>
 
         {/* Scroll bounce */}
         <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer"
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 1.6 }}
           style={{ color: "var(--muted-foreground)" }}
+          onClick={() => {
+            document
+              .getElementById("about")
+              ?.scrollIntoView({ behavior: "smooth" });
+          }}
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          >
             <path d="M12 5 L12 19 M6 13 L12 19 L18 13" />
           </svg>
         </motion.div>
@@ -293,7 +309,7 @@ export default function App() {
             </p>
 
             <div className="flex flex-wrap gap-3 mb-8">
-              {["Open to work ✨", "Remote-friendly 🌍", "Available Q3 2026 📅"].map((badge) => (
+              {["Open to work ✨", "Remote-friendly 🌍"].map((badge) => (
                 <span
                   key={badge}
                   className="px-4 py-2 rounded-full text-sm"
@@ -306,26 +322,6 @@ export default function App() {
                 >
                   {badge}
                 </span>
-              ))}
-            </div>
-
-            <div className="flex gap-4">
-              {[
-                { icon: <Github size={20} />, href: "https://github.com" },
-                { icon: <Twitter size={20} />, href: "https://twitter.com" },
-                { icon: <Mail size={20} />, href: "mailto:maya@example.com" },
-              ].map((social, i) => (
-                <motion.a
-                  key={i}
-                  href={social.href}
-                  target={social.href.startsWith("http") ? "_blank" : undefined}
-                  rel="noreferrer"
-                  whileHover={{ scale: 1.15, rotate: -5 }}
-                  className="p-3 rounded-xl"
-                  style={{ background: "var(--muted)", border: "2px solid var(--border)" }}
-                >
-                  {social.icon}
-                </motion.a>
               ))}
             </div>
           </motion.div>
@@ -440,36 +436,6 @@ export default function App() {
               </motion.div>
             ))}
           </div>
-
-          {/* Fun stats */}
-          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { value: "4+", label: "years coding", emoji: "💻" },
-              { value: "30+", label: "projects shipped", emoji: "🚀" },
-              { value: "∞", label: "cups of tea", emoji: "🍵" },
-              { value: "100%", label: "commit to cute", emoji: "🎀" },
-            ].map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="p-6 rounded-2xl"
-                style={{ background: "var(--background)", border: "2.5px dashed var(--border)" }}
-              >
-                <div className="text-3xl mb-1">{stat.emoji}</div>
-                <div
-                  style={{ fontFamily: "'Caveat', cursive", fontSize: "2.2rem", fontWeight: 700, color: "var(--primary)" }}
-                >
-                  {stat.value}
-                </div>
-                <div style={{ fontSize: "0.85rem", color: "var(--muted-foreground)", fontWeight: 600 }}>
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -494,11 +460,11 @@ export default function App() {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.03, rotate: -1 }}
-              className="block p-5 rounded-2xl"
+              className="block p-3 rounded-2xl"
               style={{
                 background: "var(--card)",
                 border: "2.5px solid var(--border)",
-                boxShadow: "4px 4px 0 #2d2417",
+                boxShadow: "3px 3px 0 #2d2417",
                 textDecoration: "none",
                 color: "var(--foreground)",
               }}
@@ -506,7 +472,7 @@ export default function App() {
               <h3
                 style={{
                   fontFamily: "'Caveat', cursive",
-                  fontSize: "1.5rem",
+                  fontSize: "1.25rem",
                   fontWeight: 700,
                 }}
               >
@@ -521,11 +487,11 @@ export default function App() {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.03, rotate: 1 }}
-              className="block p-5 rounded-2xl"
+              className="block p-3 rounded-2xl"
               style={{
                 background: "var(--card)",
                 border: "2.5px solid var(--border)",
-                boxShadow: "4px 4px 0 #2d2417",
+                boxShadow: "3px 3px 0 #2d2417",
                 textDecoration: "none",
                 color: "var(--foreground)",
               }}
@@ -533,7 +499,7 @@ export default function App() {
               <h3
                 style={{
                   fontFamily: "'Caveat', cursive",
-                  fontSize: "1.5rem",
+                  fontSize: "1.25rem",
                   fontWeight: 700,
                 }}
               >
@@ -546,11 +512,11 @@ export default function App() {
             <motion.a
               href="mailto:aryabhongade15@gmail.com"
               whileHover={{ scale: 1.03, rotate: -1 }}
-              className="block p-5 rounded-2xl"
+              className="block p-3 rounded-2xl"
               style={{
                 background: "var(--card)",
                 border: "2.5px solid var(--border)",
-                boxShadow: "4px 4px 0 #2d2417",
+                boxShadow: "3px 3px 0 #2d2417",
                 textDecoration: "none",
                 color: "var(--foreground)",
               }}
@@ -571,6 +537,78 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {showResumeModal && (
+        <div
+          className="fixed inset-0 flex items-center justify-center z-50"
+          style={{
+            background: "rgba(0,0,0,0.35)",
+          }}
+          onClick={() => setShowResumeModal(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            onClick={(e) => e.stopPropagation()}
+            className="p-8 rounded-3xl text-center max-w-sm w-full mx-4"
+            style={{
+              background: "var(--card)",
+              border: "3px solid var(--border)",
+              boxShadow: "6px 6px 0 var(--border)",
+            }}
+          >
+            <h2
+              style={{
+                fontFamily: "'Caveat', cursive",
+                fontSize: "2rem",
+                fontWeight: 700,
+              }}
+            >
+              Resume 📄
+            </h2>
+
+            <p
+              className="mt-3 mb-6"
+              style={{
+                color: "var(--muted-foreground)",
+              }}
+            >
+              Download my latest resume
+            </p>
+
+            <a
+              href="/resume.pdf"
+              download
+              className="inline-block px-6 py-3 rounded-2xl"
+              style={{
+                background: "var(--primary)",
+                color: "white",
+                textDecoration: "none",
+                fontFamily: "'Caveat', cursive",
+                fontSize: "1.3rem",
+                fontWeight: 700,
+                boxShadow: "4px 4px 0 #2d2417",
+              }}
+            >
+              Download Resume
+            </a>
+
+            <button
+              onClick={() => setShowResumeModal(false)}
+              className="block mx-auto mt-5"
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                fontFamily: "'Caveat', cursive",
+                fontSize: "1.1rem",
+              }}
+            >
+              Close ✨
+            </button>
+          </motion.div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer
